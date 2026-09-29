@@ -3,54 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Directory</title>
+    <meta name="description" content="The Corner Brew & Books - Artisanal coffee, fresh bakery delights, and bestselling books. Python course project edition.">
+    <title>The Corner Brew & Books | Cafe & Bookstore</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Company Employees</h1>
+    <!-- Top Navigation Bar -->
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="brand">
+                <span class="brand-icon">☕📖</span>
+                <div class="brand-text">
+                    <span class="brand-title">The Corner Brew &amp; Books</span>
+                    <span class="brand-subtitle">Artisanal Cafe &amp; Curated Library</span>
+                </div>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Role / Position</th>
-                <th>Department</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Anna Smith</td>
-                <td>Project Manager</td>
-                <td>Operations</td>
-                <td>anna.smith@example.com</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>John Davis</td>
-                <td>Cloud Engineer</td>
-                <td>Infrastructure</td>
-                <td>john.davis@example.com</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Elena Taylor</td>
-                <td>Frontend Developer</td>
-                <td>Engineering</td>
-                <td>elena.taylor@example.com</td>
-            </tr>
-                        <tr>
-                <td>4</td>
-                <td>John Doe</td>
-                <td>Slacker</td>
-                <td>Slacking</td>
-                <td>john.doe@gmail.com</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="nav-actions">
+                <button id="staff-portal-btn" class="btn btn-outline" type="button" aria-label="Open staff portal">
+                    <span class="btn-icon">🔐</span>
+                    <span id="staff-btn-label">Staff Portal</span>
+                </button>
+                <button id="cart-toggle-btn" class="btn btn-primary cart-badge-btn" type="button" aria-label="View shopping cart">
+                    <span class="btn-icon">🛒</span>
+                    <span>Cart</span>
+                    <span id="cart-count-badge" class="badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
+    <!-- Hero / Welcome Banner -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-chip">✨ Python Course Project • AWS Deployed</span>
+            <h1 class="hero-title">Warm Brews, Flaky Bakes &amp; Great Reads</h1>
+            <p class="hero-desc">
+                Welcome to our digital storefront! Browse our handcrafted espresso drinks, fresh artisanal pastries, 
+                and hand-picked books. Add your favorites to the cart and enjoy.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-num" id="total-drinks-count">5</span>
+                    <span class="stat-label">Specialty Drinks</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num" id="total-food-count">5</span>
+                    <span class="stat-label">Bakery Delights</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num" id="total-books-count">6</span>
+                    <span class="stat-label">Featured Books</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Store Layout -->
+    <main class="store-container">
+        <!-- Catalog Section -->
+        <section class="catalog-section">
+            <div class="catalog-toolbar">
+                <!-- Category Filter Tabs -->
+                <nav class="category-tabs" aria-label="Catalog Categories">
+                    <button class="tab-btn active" data-category="All" type="button">
+                        <span class="tab-icon">🌟</span> All Items
+                    </button>
+                    <button class="tab-btn" data-category="Drinks" type="button">
+                        <span class="tab-icon">☕</span> Drinks
+                    </button>
+                    <button class="tab-btn" data-category="Food" type="button">
+                        <span class="tab-icon">🥐</span> Bakery &amp; Food
+                    </button>
+                    <button class="tab-btn" data-category="Books" type="button">
+                        <span class="tab-icon">📚</span> Books
+                    </button>
+                </nav>
+
+                <!-- Search Input -->
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" placeholder="Search menu &amp; books..." aria-label="Search items">
+                    <button type="button" id="search-clear-btn" class="clear-btn" title="Clear search" aria-label="Clear search">&times;</button>
+                </div>
+            </div>
+
+            <!-- Active discount alert bar (if applied) -->
+            <div id="discount-banner" class="discount-banner hidden">
+                <span class="discount-banner-icon">🎉</span>
+                <span id="discount-banner-text">Staff discount applied: 10% OFF your entire order!</span>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div id="catalog-grid" class="products-grid">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+            <!-- Empty state when search has no matches -->
+            <div id="empty-results" class="empty-state hidden">
+                <span class="empty-icon">☕🔍</span>
+                <h3>No items found</h3>
+                <p>Try searching for another drink, snack or book title.</p>
+                <button type="button" class="btn btn-outline" id="reset-filter-btn">Show All Items</button>
+            </div>
+        </section>
+
+        <!-- Slide-Over Shopping Cart Panel -->
+        <aside id="cart-drawer" class="cart-drawer" aria-labelledby="cart-heading">
+            <div class="cart-header">
+                <div class="cart-title-row">
+                    <span class="cart-icon">🛒</span>
+                    <h2 id="cart-heading">Your Order</h2>
+                    <span id="cart-items-count-text" class="cart-items-count">0 items</span>
+                </div>
+                <button id="close-cart-btn" class="close-btn" type="button" aria-label="Close cart drawer">&times;</button>
+            </div>
+
+            <!-- Cart Items List Container -->
+            <div id="cart-items-container" class="cart-items-list">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Cart Footer with Pricing & Checkout -->
+            <div class="cart-footer">
+                <div class="price-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div id="cart-discount-row" class="price-row discount-row hidden">
+                    <span id="discount-label">Discount (0%)</span>
+                    <span id="cart-discount-val">-$0.00</span>
+                </div>
+                <div class="price-row total-row">
+                    <span>Total Due</span>
+                    <span id="cart-total" class="total-amount">$0.00</span>
+                </div>
+
+                <div class="cart-actions">
+                    <button id="checkout-btn" class="btn btn-primary btn-block btn-lg" type="button" disabled>
+                        <span>Checkout &amp; Pay</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button id="clear-cart-btn" class="btn btn-ghost btn-sm" type="button" disabled>
+                        Clear Cart
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Overlay backdrop for cart on small screens -->
+    <div id="cart-overlay" class="cart-backdrop"></div>
+
+    <!-- Staff Portal Dialog (Modal) -->
+    <dialog id="staff-dialog" class="modern-dialog">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <div class="dialog-title-group">
+                    <span class="dialog-icon">🔐</span>
+                    <div>
+                        <h2 class="dialog-title">Employee Portal</h2>
+                        <p class="dialog-subtitle">Staff authentication &amp; discount management</p>
+                    </div>
+                </div>
+                <button id="close-staff-dialog-btn" class="close-btn" type="button" aria-label="Close portal">&times;</button>
+            </div>
+
+            <!-- Login View -->
+            <div id="staff-login-view" class="dialog-body">
+                <form id="staff-login-form" class="staff-form">
+                    <div class="form-group">
+                        <label for="staff-username">Username</label>
+                        <input type="text" id="staff-username" placeholder="e.g. barista_bob, manager_alice, admin" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="staff-password">Password</label>
+                        <input type="password" id="staff-password" placeholder="Enter password" required autocomplete="current-password">
+                    </div>
+                    <div id="staff-login-error" class="form-error hidden">
+                        Invalid username or password. Please check your credentials.
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+
+                <div class="staff-credentials-hint">
+                    <strong>Demo Staff Credentials (from assignment):</strong>
+                    <ul>
+                        <li><code>barista_bob</code> / <code>espresso2026</code></li>
+                        <li><code>manager_alice</code> / <code>beansPass!</code></li>
+                        <li><code>admin</code> / <code>coffee123</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Authenticated Dashboard View -->
+            <div id="staff-dashboard-view" class="dialog-body hidden">
+                <div class="staff-welcome-banner">
+                    <span class="badge-role">Verified Staff</span>
+                    <h3 id="staff-greeting">Welcome, Barista!</h3>
+                    <p>Apply customer discounts to the active order, just like in Assignment.py.</p>
+                </div>
+
+                <div class="discount-manager-card">
+                    <h4>Order Discount</h4>
+                    <p class="text-muted">Select a preset or enter a custom percentage (0% - 100%):</p>
+                    <div class="quick-discounts">
+                        <button type="button" class="btn btn-chip" data-discount="5">5%</button>
+                        <button type="button" class="btn btn-chip" data-discount="10">10%</button>
+                        <button type="button" class="btn btn-chip" data-discount="15">15%</button>
+                        <button type="button" class="btn btn-chip" data-discount="20">20%</button>
+                    </div>
+
+                    <div class="custom-discount-row">
+                        <div class="input-with-symbol">
+                            <input type="number" id="custom-discount-input" min="0" max="100" placeholder="Custom %">
+                            <span class="symbol">%</span>
+                        </div>
+                        <button type="button" id="apply-custom-discount-btn" class="btn btn-secondary">Apply</button>
+                    </div>
+
+                    <div class="discount-status-box">
+                        <span>Current Active Discount:</span>
+                        <strong id="active-discount-display">0%</strong>
+                    </div>
+
+                    <div class="staff-actions-row">
+                        <button type="button" id="reset-discount-btn" class="btn btn-outline btn-sm">Reset to 0%</button>
+                        <button type="button" id="staff-logout-btn" class="btn btn-ghost btn-sm">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Receipt / Checkout Dialog (Modal) -->
+    <dialog id="receipt-dialog" class="modern-dialog receipt-dialog-container">
+        <div class="dialog-content receipt-wrapper">
+            <div class="thermal-receipt">
+                <div class="receipt-header">
+                    <span class="receipt-logo">☕ 📖</span>
+                    <h3>The Corner Brew &amp; Books</h3>
+                    <p class="receipt-sub">42 High Street • Cloud City, AWS</p>
+                    <p class="receipt-sub" id="receipt-timestamp">Sep 29, 2026 15:30</p>
+                    <p class="receipt-order-no" id="receipt-order-id">ORDER #CB-7429</p>
+                    <div class="receipt-divider">================================</div>
+                </div>
+
+                <div class="receipt-body">
+                    <table class="receipt-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-right">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receipt-items-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+
+                    <div class="receipt-divider">--------------------------------</div>
+
+                    <div class="receipt-totals">
+                        <div class="receipt-row">
+                            <span>Subtotal:</span>
+                            <span id="receipt-subtotal">$0.00</span>
+                        </div>
+                        <div id="receipt-discount-row" class="receipt-row text-discount hidden">
+                            <span id="receipt-discount-label">Staff Discount:</span>
+                            <span id="receipt-discount-val">-$0.00</span>
+                        </div>
+                        <div class="receipt-row receipt-final-total">
+                            <span>TOTAL PAID:</span>
+                            <span id="receipt-total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-divider">================================</div>
+                    <div class="receipt-footer">
+                        <p>Thank you for stopping by!</p>
+                        <p class="receipt-small">Enjoy your reading and delicious brew.</p>
+                        <p class="receipt-small">Pipeline Deployed • AWS S3 &amp; CloudFront</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="receipt-actions">
+                <button type="button" id="receipt-print-btn" class="btn btn-outline">🖨️ Print Receipt</button>
+                <button type="button" id="receipt-done-btn" class="btn btn-primary">Start New Order</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Floating Action Button for mobile cart access -->
+    <button id="floating-cart-btn" class="floating-cart-btn" type="button" aria-label="Open Cart">
+        <span>🛒</span>
+        <span id="floating-cart-badge" class="badge">0</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>The Corner Brew &amp; Books</h4>
+                <p>Bringing together the warmth of fresh coffee and the joy of a good book.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Course Assignment Integration</h4>
+                <p>Converted from terminal-based Python project to a responsive static web application.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Cloud Infrastructure</h4>
+                <p>Automated CI/CD pipeline via GitHub Actions to AWS.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 The Corner Brew &amp; Books. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script src="script.js"></script>
 </body>
 </html>

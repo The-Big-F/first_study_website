@@ -1,0 +1,24 @@
+{
+  "Drinks": [
+    ["Espresso", 2.50, "Rich and bold single shot of concentrated coffee"],
+    ["Americano", 3.00, "Espresso diluted with hot water for a smooth brew"],
+    ["Cappuccino", 4.00, "Equal parts espresso, steamed milk, and airy foam"],
+    ["Latte", 4.25, "Smooth espresso balanced with plenty of steamed milk"],
+    ["Cold Brew", 4.50, "Slow-steeped in cold water for a crisp, low-acidity flavor"]
+  ],
+  "Food": [
+    ["Blueberry Muffin", 3.25, "Freshly baked muffin packed with juicy wild blueberries"],
+    ["Butter Croissant", 3.00, "Flaky, golden, and layered with rich French butter"],
+    ["Chocolate Chip Cookie", 2.50, "Soft-baked cookie loaded with semi-sweet chocolate chunks"],
+    ["Avocado Toast", 6.50, "Mashed seasoned avocado on sourdough bread"],
+    ["Bagel with Cream Cheese", 3.75, "Toasted plain bagel served with a thick spread of cream cheese"]
+  ],
+  "Books": [
+    ["The Great Gatsby (Fiction)", 10.99, "F. Scott Fitzgerald's classic tale of wealth, love, and the Jazz Age"],
+    ["To Kill a Mockingbird (Fiction)", 12.50, "Harper Lee's Pulitzer Prize-winning story of justice in the American South"],
+    ["Atomic Habits (Non-Fiction)", 16.00, "James Clear's practical guide to building good habits and breaking bad ones"],
+    ["Sapiens: A Brief History (Non-Fiction)", 18.50, "Yuval Noah Harari's exploration of humankind's evolution"],
+    ["Dune (Sci-Fi)", 14.99, "Frank Herbert's epic masterpiece of politics on Arrakis"],
+    ["Project Hail Mary (Sci-Fi)", 15.25, "Andy Weir's thrilling survival journey of a lone astronaut"]
+  ]
+}
